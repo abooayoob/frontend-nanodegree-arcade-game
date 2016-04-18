@@ -15,7 +15,7 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = -200;
-    this.y = getRandomInt(1, 3)*73;
+    this.y = getRandomInt(1, 3)*83;
     this.startTime = getRandomInt(1, 30)*80;
     this.wait = 0;
     this.speed = getRandomInt(200, 500);
@@ -50,9 +50,11 @@ var Player = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+
     this.sprite = 'images/char-boy.png';
+    // Position character in the middle of the bottom row.
+    this.x = 2*101;
+    this.y = 5*83;
 };
 
 // Update the enemy's position, required method for game
@@ -69,13 +71,25 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function() {
+  switch (arguments[0]) {
+    case "left": this.x -= 101;
+      break;
+    case "right": this.x += 101;
+      break;
+    case "up": this.y -= 83;
+      break;
+    case "down": this.y += 83;
+      break;
 
+    default:
+
+  }
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var numberOfEnemies = 30, allEnemies = [], newEnemy, player;
+var numberOfEnemies = 100, allEnemies = [], newEnemy, player;
 
 for (var i = 0; i < numberOfEnemies; i++) {
   newEnemy = new Enemy();
