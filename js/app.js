@@ -5,7 +5,7 @@
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-var start = 0;
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -34,6 +34,11 @@ Enemy.prototype.update = function(dt) {
     }else {
       ++this.wait;
     }
+    // Check if this bug and the player is on the same tile
+    if (player.y === this.y && this.x >= player.x && this.x  <= (player.x+101)) {
+      player.x = 2*101;
+      player.y = 5*83;
+    }
 
 };
 
@@ -57,7 +62,7 @@ var Player = function() {
     this.y = 5*83;
 };
 
-// Update the enemy's position, required method for game
+// Update the player's position, required method for game
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
@@ -65,7 +70,6 @@ Player.prototype.update = function(dt) {
     // all computers.
 };
 
-// Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
